@@ -16,7 +16,7 @@
       </div>
     </nav>
     <div class="flex flex-row flex-1 min-h-0">
-      <section class="w-1/5 text-center border border-amber-500">
+      <section class="w-1/8 text-center border border-amber-500">
         <button>+ Create (drop down)</button>
         <section>
           mini calendar view (selector)
@@ -24,7 +24,10 @@
       </section>
       <section class="flex-1 overflow-hidden bg-slate-300 rounded-4xl">
         <div class="grid grid-cols-7 gap-px bg-slate-300 h-full">
-          <DayCard v-for="value in 35" :key="value"/>
+          <DayCard 
+            v-for="value in 35" 
+            :key="value"
+            :day="value" />
         </div>
       </section>
     </div>
@@ -33,6 +36,7 @@
 
 <script setup lang="ts">
 import DayCard from '@/components/DayCard.vue';
+
 </script>
 
 <style lang="scss" scoped>
