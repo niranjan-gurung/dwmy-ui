@@ -3,7 +3,6 @@
 <template>
   <div id="app">
     <router-view />
-    main calendaar
   </div>
 </template>
 
