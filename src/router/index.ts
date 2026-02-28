@@ -3,6 +3,7 @@ import AuthLayout from '@/layouts/AuthLayout.vue'
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
 import Home from '@/views/Home.vue'
+import NotFound from '@/views/NotFound.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,7 +19,13 @@ const router = createRouter({
     },
     {
       path: '/',
+      name: 'Home',
       component: Home,
+    },
+    {
+      path: '/:catchAll(.*)*',
+      name: 'NotFound',
+      component: NotFound
     }
   ],
 })
