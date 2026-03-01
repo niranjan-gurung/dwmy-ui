@@ -13,12 +13,41 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
       </svg>
     </button>
-    <section>
-      mini calendar view (selector)
+    <section class="px-4">
+      <div class="flex items-center justify-between gap-1">
+        <h2 class="font-semibold">
+          {{ currentMonthYear }}
+        </h2>
+        <div>
+          <button
+            class="inline-flex items-center justify-center 
+                  size-6 rounded-full hover:bg-slate-200 hover:cursor-pointer
+                  active:bg-slate-300 translate-y-px">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+          <button 
+            class="inline-flex items-center justify-center 
+                  size-6 rounded-full hover:bg-slate-200 hover:cursor-pointer
+                  active:bg-slate-300 translate-y-px">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 6l6 6-6 6"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="grid grid-cols-7 gap-px h-full">
+        <WeekdayHeader :isInitial="true" />
+      </div>
     </section>
   </div>
 </template>
 
 <script setup lang="ts">
+import WeekdayHeader from './WeekdayHeader.vue';
 
+defineProps<{ 
+  currentMonthYear: string 
+}>();
 </script>

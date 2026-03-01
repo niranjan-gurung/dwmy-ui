@@ -15,7 +15,7 @@
 import type { CalendarCell } from '@/types/calendar';
 import { toRefs } from 'vue';
 
-const { cell } = defineProps<{cell: CalendarCell}>();
+const { cell } = defineProps<{ cell: CalendarCell }>();
 const { day, isToday, isCurrentMonth } = toRefs(cell);
 </script>
 

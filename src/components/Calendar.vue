@@ -1,11 +1,11 @@
 <template>
   <div 
-    class="grid grid-cols-7 gap-px bg-slate-300 h-full"
+    class="grid grid-cols-7 gap-px h-full"
     :style="{
       gridTemplateRows: `auto repeat(${weekCount}, 1fr)`
     }"
   >
-    <WeekdayHeader />
+    <WeekdayHeader :isInitial="false" />
     <DayCard 
       v-for="value in calendarCells" 
       :key="value.fullDate.toISOString()"
@@ -20,7 +20,7 @@ import { computed } from 'vue';
 import type { CalendarCell } from '@/types/calendar';
 import WeekdayHeader from '@/components/WeekdayHeader.vue';
 
-const { currentDate } = defineProps<{currentDate: Date}>();
+const { currentDate } = defineProps<{ currentDate: Date }>();
 
 const weekCount = computed(() => {
   return calendarCells.value.length / 7
