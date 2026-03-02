@@ -13,13 +13,14 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
       </svg>
     </button>
-    <section class="px-4">
+    <section class="space-y-2">
       <div class="flex items-center justify-between gap-1">
-        <h2 class="font-semibold">
+        <h2 class="font-semibold pl-2">
           {{ currentMonthYear }}
         </h2>
         <div>
           <button
+            @click="onMonthChange(-1)"
             class="inline-flex items-center justify-center 
                   size-6 rounded-full hover:bg-slate-200 hover:cursor-pointer
                   active:bg-slate-300 translate-y-px">
@@ -28,6 +29,7 @@
             </svg>
           </button>
           <button 
+            @click="onMonthChange(1)"
             class="inline-flex items-center justify-center 
                   size-6 rounded-full hover:bg-slate-200 hover:cursor-pointer
                   active:bg-slate-300 translate-y-px">
@@ -37,17 +39,22 @@
           </button>
         </div>
       </div>
-      <div class="grid grid-cols-7 gap-px h-full">
+      <div class="grid grid-cols-7 gap-px">
         <WeekdayHeader :isInitial="true" />
+        <MiniCalendar :currentDate="currentDate" />
       </div>
     </section>
   </div>
 </template>
 
 <script setup lang="ts">
+import MiniCalendar from './MiniCalendar.vue';
 import WeekdayHeader from './WeekdayHeader.vue';
 
-defineProps<{ 
-  currentMonthYear: string 
+const props = defineProps<{ 
+  currentDate: Date,
+  currentMonthYear: string,
+  onMonthChange: (offset: number) => void
 }>();
+
 </script>

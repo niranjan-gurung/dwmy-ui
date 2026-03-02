@@ -4,3 +4,7 @@ export type CalendarCell = {
   isToday: boolean,
   fullDate: Date
 }
+
+export type CalendarGridOptions = {
+  fixedGrid?: boolean
+}

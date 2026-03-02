@@ -3,7 +3,7 @@
     v-for="day in WEEKDAYS" 
     :key="day"
     class="text-xs text-slate-600 font-semibold pt-2 text-center"
-    :class="!isInitial ? 'bg-white' : ''"
+    :class="{'bg-white': !isInitial}"
   >
     {{ !isInitial ? day.toUpperCase() : day[0] }}
   </div>

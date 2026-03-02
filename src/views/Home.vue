@@ -6,10 +6,13 @@
     />
     <div class="flex flex-row flex-1 min-h-0">
       <section class="w-62">
-        <SideBar :currentMonthYear="currentMonthYear" 
+        <SideBar 
+          :currentDate="currentDate"
+          :currentMonthYear="currentMonthYear"
+          :onMonthChange="changeMonth"
         />
       </section>
-      <section class="flex-1 overflow-hidden bg-slate-300 rounded-4xl">
+      <section class="flex-1 overflow-hidden bg-slate-300 rounded-4xl ml-4">
         <Calendar :currentDate="currentDate" />
       </section>
     </div>
@@ -40,6 +43,3 @@ function changeMonth(offset: number) {
   currentDate.value = d;
 }
 </script>
-
-<style lang="css" scoped>
-</style>

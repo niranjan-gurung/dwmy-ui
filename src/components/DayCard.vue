@@ -1,23 +1,21 @@
 <template>
   <div 
-    :class="isCurrentMonth ? '' : 'text-slate-500'"
-    class="text-center bg-white">
+    :class="{'text-slate-500': !props.cell.isCurrentMonth}"
+    class="flex justify-center text-xs font-semibold bg-white py-1"
+  >
     <span 
-      :class="isToday ? 'bg-blue-500 hover:bg-blue-400 text-white' : 'hover:bg-slate-200'" 
-      class="inline-flex items-center justify-center text-xs font-semibold 
-            size-6 rounded-full hover:cursor-pointer">
-      {{ day }}
+      :class="props.cell.isToday ? 'bg-blue-500 hover:bg-blue-400 text-white' : 'hover:bg-slate-200'" 
+      class="flex items-center justify-center
+            size-6 rounded-full cursor-pointer">
+      {{ props.cell.day }}
     </span>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { CalendarCell } from '@/types/calendar';
-import { toRefs } from 'vue';
 
-const { cell } = defineProps<{ cell: CalendarCell }>();
-const { day, isToday, isCurrentMonth } = toRefs(cell);
+const props = defineProps<{ 
+  cell: CalendarCell 
+}>();
 </script>
-
-<style scoped>
-</style>
