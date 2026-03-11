@@ -15,7 +15,9 @@
           Calendar
         </h2>
       </div>
-      <button class="border border-slate-500 rounded-4xl 
+      <button 
+        @click="OnTodayClicked"
+        class="border border-slate-500 rounded-4xl 
               px-6 py-2 text-sm font-semibold text-slate-800 
               hover:cursor-pointer hover:bg-gray-200
               active:bg-gray-300 transition-colors duration-200 ease-out">
@@ -46,16 +48,13 @@
         {{ currentMonthYear }}
       </h2>
     </div>
-    <div class="flex justify-center items-center gap-4">
-      <button class="flex gap-2 border border-slate-500 rounded-4xl
-              px-5 py-2 text-sm font-semibold text-slate-800
-              hover:cursor-pointer hover:bg-gray-200
-              active:bg-gray-300 transition-colors duration-200 ease-out">
-        Month
-        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="0" stroke="currentColor" class="size-4 shrink-0 self-center translate-y-px">
-          <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-        </svg>
-      </button>
+    <div class="flex justify-center items-center gap-6">
+      <Dropdown v-model="viewMode">
+        <DropdownItem value="Day">Day</DropdownItem>
+        <DropdownItem value="Week">Week</DropdownItem>
+        <DropdownItem value="Month">Month</DropdownItem>
+        <DropdownItem value="Year">Year</DropdownItem>
+      </Dropdown>
       <div class="flex items-center justify-center 
           size-10 rounded-full bg-neutral-200 
           hover:cursor-pointer hover:ring-2 hover:ring-gray-300" 
@@ -67,8 +66,22 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
+import Dropdown from './dropdown/Dropdown.vue';
+import DropdownItem from './dropdown/DropdownItem.vue';
+
+const emit = defineEmits<{
+  'todayEvent': []
+}>();
+
 defineProps<{
   currentMonthYear: string,
   onMonthChange: (offset: number) => void
 }>();
+
+function OnTodayClicked() {
+  emit('todayEvent');
+}
+
+const viewMode = ref('Month');
 </script>

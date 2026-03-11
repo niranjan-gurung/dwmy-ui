@@ -3,6 +3,7 @@
     <NavBar 
       :currentMonthYear="currentMonthYear"
       :onMonthChange="changeMonth" 
+      @todayEvent="goToToday"
     />
     <div class="flex flex-row flex-1 min-h-0">
       <section class="w-62">
@@ -41,5 +42,16 @@ function changeMonth(offset: number) {
   const daysInMonth = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
   d.setDate(Math.min(day, daysInMonth));
   currentDate.value = d;
+}
+
+function goToToday() {
+  const today = new Date();
+
+  // only update if current view is not todays current date 
+  if (today.getFullYear() !== currentDate.value.getFullYear() ||
+      today.getMonth() !== currentDate.value.getMonth()
+    ) {
+    currentDate.value = today;
+  }
 }
 </script>
