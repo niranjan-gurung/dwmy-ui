@@ -17,8 +17,8 @@
 
     <div 
       v-if="isOpen"
-      class="absolute mt-2 w-36 bg-gray-100 border border-slate-200
-            rounded-xl shadow-lg z-50"
+      class="absolute mt-2 pt-2 pb-2 w-36 bg-slate-100 border border-slate-200
+            rounded-xl shadow-md z-50"
     >
       <slot></slot>
     </div>

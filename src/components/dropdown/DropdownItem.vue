@@ -1,7 +1,8 @@
 <template>
   <button
     @click="select(value)"
-    class="block w-full text-left px-4 py-2 text-sm hover:bg-slate-100"
+    class="block w-full text-left px-4 py-2 text-sm 
+        hover:bg-slate-200 hover:cursor-pointer"
   >
     <slot></slot>
   </button>

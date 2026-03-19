@@ -1,6 +1,7 @@
 <template>
   <nav class="flex justify-between items-center pb-2">
     <div class="flex justify-center items-center gap-6">
+      <!-- hamburger toggle button svg -->
       <button class="inline-flex justify-center items-center size-12 
               rounded-full hover:cursor-pointer hover:bg-gray-200">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

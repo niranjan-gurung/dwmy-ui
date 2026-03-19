@@ -12,11 +12,11 @@ Learning:
 - slots
 - shared layouts
 - composables
+- provide/inject
 
 ## todo
 - watchers
 - lifecycle hooks
-- provide/inject
 - authentication
 
 Will eventually connect a backend for background processing (reminders, events)
