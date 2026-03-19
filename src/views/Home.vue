@@ -1,6 +1,8 @@
 <template>
   <main class="flex flex-col bg-slate-50 h-screen px-4 py-2">
     <NavBar 
+      :viewMode="viewMode"
+      @updateViewMode="viewMode = $event"
       :currentMonthYear="currentMonthYear"
       :onMonthChange="changeMonth" 
       @todayEvent="goToToday"
@@ -14,13 +16,17 @@
         />
       </section>
       <section class="flex-1 overflow-hidden bg-slate-300 rounded-4xl ml-4">
-        <Calendar :currentDate="currentDate" />
+        <Calendar 
+          :viewMode="viewMode"
+          :currentDate="currentDate" 
+        />
       </section>
     </div>
   </main>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import Calendar from '@/components/Calendar.vue';
 import NavBar from '@/components/NavBar.vue';
 import SideBar from '@/components/SideBar.vue';
@@ -32,4 +38,6 @@ const {
   changeMonth,
   goToToday
 } = useCalendarNavigation();
+
+const viewMode = ref('Month');
 </script>

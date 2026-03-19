@@ -50,8 +50,8 @@
       </h2>
     </div>
     <div class="flex justify-center items-center gap-6">
-      <Dropdown @select="viewMode = $event">
-        <template #label>
+      <Dropdown @select="OnViewModeUpdate">
+        <template #dropdown>
           {{ viewMode }}
         </template>
         <DropdownItem value="Day">Day</DropdownItem>
@@ -70,15 +70,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import Dropdown from './dropdown/Dropdown.vue';
 import DropdownItem from './dropdown/DropdownItem.vue';
 
 const emit = defineEmits<{
-  'todayEvent': []
+  'todayEvent': [],
+  'updateViewMode': [value: string]
 }>();
 
 defineProps<{
+  viewMode: string,
   currentMonthYear: string,
   onMonthChange: (offset: number) => void
 }>();
@@ -87,5 +88,7 @@ function OnTodayClicked() {
   emit('todayEvent');
 }
 
-const viewMode = ref('Month');
+function OnViewModeUpdate(value: string) {
+  emit('updateViewMode', value);
+}
 </script>

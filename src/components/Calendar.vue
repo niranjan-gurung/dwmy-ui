@@ -1,29 +1,15 @@
 <template>
-  <div 
-    class="grid grid-cols-7 gap-px h-full"
-    :style="{
-      gridTemplateRows: `auto repeat(${weekCount}, 1fr)`
-    }"
-  >
-    <WeekdayHeader :isInitial="false" />
-    <DayCard 
-      v-for="cell in calendarCells" 
-      :key="cell.fullDate.toISOString()"
-      :cell="cell" 
-    />
-  </div>
+  <p v-if="viewMode === 'Day'">this is the day view!</p>
+  <p v-else-if="viewMode === 'Week'">this is the week view!</p>
+  <Month v-else-if="viewMode === 'Month'" :currentDate="currentDate" />
+  <p v-else-if="viewMode === 'Year'">this is the year view!</p>
 </template>
 
 <script setup lang="ts">
-import DayCard from '@/components/DayCard.vue';
-import WeekdayHeader from '@/components/WeekdayHeader.vue';
-import { useCalendarGrid } from '@/composables/useCalendarGrid';
-import { toRef } from 'vue';
+import Month from './views/Month.vue';
 
 const props = defineProps<{ 
+  viewMode: string,
   currentDate: Date 
 }>();
-
-const { calendarCells, weekCount } = 
-  useCalendarGrid(toRef(props, 'currentDate'));
 </script>

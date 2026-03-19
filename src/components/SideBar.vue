@@ -9,7 +9,7 @@
             active:bg-blue-200 transition-colors duration-200 ease-out"
       :hasIcon="true"
     >
-      <template #label>
+      <template #dropdown>
         Create
       </template>
       <DropdownItem value="Event">Event</DropdownItem>
