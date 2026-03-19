@@ -5,8 +5,16 @@
       class="flex gap-2 border border-slate-500 rounded-4xl
             px-5 py-2 text-sm font-semibold text-slate-800
             hover:cursor-pointer hover:bg-gray-200
-            active:bg-gray-300 transition-colors duration-200 ease-out">
-      {{ modelValue }}
+            active:bg-gray-300 transition-colors duration-200 ease-out"
+      :class="btnClass"
+    >
+      <svg v-if="hasIcon"
+        xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="size-4 shrink-0 translate-y-px">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+      </svg>
+      <slot name="label">
+        {{ modelValue }}
+      </slot>
       <svg 
         viewBox="0 0 24 24" 
         class="size-4 shrink-0 self-center translate-y-px"
@@ -29,17 +37,23 @@
 import { ref, provide } from 'vue';
 
 const emit = defineEmits<{
+  'select': [value: string],
   'update:modelValue': [value: string]
 }>();
 
 const props = defineProps<{
-  modelValue: string
+  modelValue?: string,
+  btnClass?: string,
+  hasIcon?: boolean
 }>();
 
 const isOpen = ref(false);
 
 function select(value: string) {
-  emit('update:modelValue', value);
+  emit('select', value);
+  if (props.modelValue !== undefined) {
+    emit('update:modelValue', value);
+  }
   isOpen.value = false;
 }
 

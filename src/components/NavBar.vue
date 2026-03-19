@@ -50,7 +50,10 @@
       </h2>
     </div>
     <div class="flex justify-center items-center gap-6">
-      <Dropdown v-model="viewMode">
+      <Dropdown @select="viewMode = $event">
+        <template #label>
+          {{ viewMode }}
+        </template>
         <DropdownItem value="Day">Day</DropdownItem>
         <DropdownItem value="Week">Week</DropdownItem>
         <DropdownItem value="Month">Month</DropdownItem>
