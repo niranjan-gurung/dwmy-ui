@@ -8,3 +8,5 @@ export type CalendarCell = {
 export type CalendarGridOptions = {
   fixedGrid?: boolean
 }
+
+export type ViewMode = 'Day' | 'Week' | 'Month' | 'Year';

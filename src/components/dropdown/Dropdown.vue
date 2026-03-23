@@ -13,7 +13,6 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
       </svg>
       <slot name="dropdown">
-        {{ modelValue }}
       </slot>
       <svg 
         viewBox="0 0 24 24" 
@@ -35,25 +34,21 @@
 
 <script setup lang="ts">
 import { ref, provide } from 'vue';
+import type { ViewMode } from '@/types/calendar';
 
 const emit = defineEmits<{
-  'select': [value: string],
-  'update:modelValue': [value: string]
+  'select': [value: ViewMode]
 }>();
 
 const props = defineProps<{
-  modelValue?: string,
   btnClass?: string,
   hasIcon?: boolean
 }>();
 
 const isOpen = ref(false);
 
-function select(value: string) {
+function select(value: ViewMode) {
   emit('select', value);
-  if (props.modelValue !== undefined) {
-    emit('update:modelValue', value);
-  }
   isOpen.value = false;
 }
 

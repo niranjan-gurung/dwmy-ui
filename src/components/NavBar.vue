@@ -72,14 +72,15 @@
 <script setup lang="ts">
 import Dropdown from './dropdown/Dropdown.vue';
 import DropdownItem from './dropdown/DropdownItem.vue';
+import type { ViewMode } from '@/types/calendar';
 
 const emit = defineEmits<{
   'todayEvent': [],
-  'updateViewMode': [value: string]
+  'updateViewMode': [value: ViewMode]
 }>();
 
 defineProps<{
-  viewMode: string,
+  viewMode: ViewMode,
   currentMonthYear: string,
   onMonthChange: (offset: number) => void
 }>();
@@ -88,7 +89,7 @@ function OnTodayClicked() {
   emit('todayEvent');
 }
 
-function OnViewModeUpdate(value: string) {
+function OnViewModeUpdate(value: ViewMode) {
   emit('updateViewMode', value);
 }
 </script>

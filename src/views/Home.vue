@@ -30,6 +30,7 @@ import { ref } from 'vue';
 import Calendar from '@/components/Calendar.vue';
 import NavBar from '@/components/NavBar.vue';
 import SideBar from '@/components/SideBar.vue';
+import type { ViewMode } from '@/types/calendar';
 import { useCalendarNavigation } from '@/composables/useCalendarNavigation';
 
 const {
@@ -39,5 +40,5 @@ const {
   goToToday
 } = useCalendarNavigation();
 
-const viewMode = ref('Month');
+const viewMode = ref<ViewMode>('Month');
 </script>

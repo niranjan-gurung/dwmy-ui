@@ -6,10 +6,11 @@
 </template>
 
 <script setup lang="ts">
-import Month from './views/Month.vue';
+import Month from './calendar/views/Month.vue';
+import type { ViewMode } from '@/types/calendar';
 
 const props = defineProps<{ 
-  viewMode: string,
+  viewMode: ViewMode,
   currentDate: Date 
 }>();
 </script>
