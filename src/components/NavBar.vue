@@ -52,12 +52,14 @@
         </button>
       </div>
       <h2 class="text-xl font-medium leading-none">
-        {{ currentMonthYear }}
+        <div v-if="viewMode === 'Day'">{{ currDate }}</div>
+        <div v-else-if="viewMode === 'Year'">{{ currentDate.getFullYear() }}</div>
+        <div v-else>{{ currentMonthYear }}</div>
       </h2>
     </div>
     <div class="flex justify-center items-center gap-6">
       <Dropdown 
-        @select="test"
+        @select="() => {}"
         btn-class="inline-flex items-center justify-center size-10 rounded-full 
               hover:bg-gray-200 hover:cursor-pointer active:bg-gray-300
               transition-colors duration-200 ease-out"
@@ -104,17 +106,23 @@
 import Dropdown from './dropdown/Dropdown.vue';
 import DropdownItem from './dropdown/DropdownItem.vue';
 import type { ViewMode } from '@/types/calendar';
+import { computed } from 'vue';
 
 const emit = defineEmits<{
   'todayEvent': [],
   'updateViewMode': [value: ViewMode]
 }>();
 
-defineProps<{
+const props = defineProps<{
   viewMode: ViewMode,
+  currentDate: Date,
   currentMonthYear: string,
   onMonthChange: (offset: number) => void
 }>();
+
+const currDate = computed(() => {
+  return `${props.currentDate.getDate()} ${props.currentMonthYear}`
+})
 
 function OnTodayClicked() {
   emit('todayEvent');
@@ -122,9 +130,5 @@ function OnTodayClicked() {
 
 function OnViewModeUpdate(value: string) {
   emit('updateViewMode', value as ViewMode);
-}
-
-function test() {
-  console.log('hi');
 }
 </script>

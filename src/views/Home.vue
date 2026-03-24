@@ -1,24 +1,25 @@
 <template>
   <main class="flex flex-col bg-slate-50 h-screen px-4 py-2">
     <NavBar 
-      :viewMode="viewMode"
-      @updateViewMode="viewMode = $event"
-      :currentMonthYear="currentMonthYear"
-      :onMonthChange="changeMonth" 
-      @todayEvent="goToToday"
+      :view-mode="viewMode"
+      @update-view-mode="viewMode = $event"
+      :current-date="currentDate"
+      :current-month-year="currentMonthYear"
+      :on-month-change="changeMonth" 
+      @today-event="goToToday"
     />
     <div class="flex flex-row flex-1 min-h-0">
       <section class="w-62">
         <SideBar 
-          :currentDate="currentDate"
-          :currentMonthYear="currentMonthYear"
-          :onMonthChange="changeMonth"
+          :current-date="currentDate"
+          :current-month-year="currentMonthYear"
+          :on-month-change="changeMonth"
         />
       </section>
       <section class="flex-1 overflow-hidden bg-slate-300 rounded-4xl ml-4">
         <Calendar 
-          :viewMode="viewMode"
-          :currentDate="currentDate" 
+          :view-mode="viewMode"
+          :current-date="currentDate" 
         />
       </section>
     </div>

@@ -47,8 +47,8 @@
         </div>
       </div>
       <div class="grid grid-cols-7 gap-px">
-        <WeekdayHeader :isInitial="true" />
-        <MiniCalendar :currentDate="currentDate" />
+        <WeekdayHeader :is-initial="true" />
+        <MiniCalendar :current-date="currentDate" />
       </div>
     </section>
   </div>
