@@ -2,15 +2,20 @@
   <div class="space-y-4">
     <Dropdown 
       @select="onCreateSelected"
-      btnClass="flex items-center gap-2 bg-white
+      btn-class="flex items-center gap-2 bg-white
             shadow-md/20 rounded-2xl
             px-6 py-4 text-md font-semibold text-slate-800
             hover:cursor-pointer hover:bg-blue-100
             active:bg-blue-200 transition-colors duration-200 ease-out"
-      :hasIcon="true"
     >
-      <template #dropdown>
+      <template #button>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        </svg>
         Create
+        <svg viewBox="0 0 24 24" class="size-4 shrink-0 self-center translate-y-px">
+          <path d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+        </svg>
       </template>
       <DropdownItem value="Event">Event</DropdownItem>
       <DropdownItem value="Task">Task</DropdownItem>
