@@ -10,11 +10,10 @@
 
 <script setup lang="ts">
 import { inject } from 'vue';
-import type { ViewMode } from '@/types/calendar';
 
 const props = defineProps<{
-  value: ViewMode
+  value: string
 }>();
 
-const select = inject<(value: ViewMode) => void>('dropdown-select')!;
+const select = inject<(value: string) => void>('dropdown-select')!;
 </script>

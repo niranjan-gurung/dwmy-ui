@@ -69,5 +69,4 @@ const props = defineProps<{
 function onCreateSelected() {
   console.log('create clicked!');
 }
-
 </script>

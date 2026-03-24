@@ -1,7 +1,7 @@
 <template>
-  <div class="relative inline-block">
+  <div ref="dropdownRef" class="relative inline-block">
     <button 
-      @click="isOpen = !isOpen"
+      @click.stop="isOpen = !isOpen"
       :class="btnClass"
     >
       <slot name="button"></slot>
@@ -17,11 +17,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, provide } from 'vue';
-import type { ViewMode } from '@/types/calendar';
+import { useClickOutside } from '@/composables/useClickOutside';
+import { ref, provide, useTemplateRef } from 'vue';
 
 const emit = defineEmits<{
-  'select': [value: ViewMode]
+  'select': [value: string]
 }>();
 
 const props = defineProps<{
@@ -29,8 +29,13 @@ const props = defineProps<{
 }>();
 
 const isOpen = ref(false);
+const dropdownRef = useTemplateRef<HTMLElement>('dropdownRef');
 
-function select(value: ViewMode) {
+useClickOutside(dropdownRef, () => {
+  isOpen.value = false;
+});
+
+function select(value: string) {
   emit('select', value);
   isOpen.value = false;
 }

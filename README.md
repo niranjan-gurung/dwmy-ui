@@ -13,10 +13,10 @@ Learning:
 - shared layouts
 - composables
 - provide/inject
+- lifecycle hooks
 
 ## todo
 - watchers
-- lifecycle hooks
 - authentication
 
 Will eventually connect a backend for background processing (reminders, events)

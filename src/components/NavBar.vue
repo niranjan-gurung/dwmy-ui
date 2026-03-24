@@ -120,8 +120,8 @@ function OnTodayClicked() {
   emit('todayEvent');
 }
 
-function OnViewModeUpdate(value: ViewMode) {
-  emit('updateViewMode', value);
+function OnViewModeUpdate(value: string) {
+  emit('updateViewMode', value as ViewMode);
 }
 
 function test() {
