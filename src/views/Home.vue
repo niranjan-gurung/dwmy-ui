@@ -5,7 +5,7 @@
       @update-view-mode="viewMode = $event"
       :current-date="currentDate"
       :current-month-year="currentMonthYear"
-      :on-month-change="changeMonth" 
+      @navigate="navigateDate"
       @today-event="goToToday"
     />
     <div class="flex flex-row flex-1 min-h-0">
@@ -13,7 +13,7 @@
         <SideBar 
           :current-date="currentDate"
           :current-month-year="currentMonthYear"
-          :on-month-change="changeMonth"
+          @navigate="navigateDate"
         />
       </section>
       <section class="flex-1 overflow-hidden bg-slate-300 rounded-4xl ml-4">
@@ -34,12 +34,12 @@ import SideBar from '@/components/SideBar.vue';
 import type { ViewMode } from '@/types/calendar';
 import { useCalendarNavigation } from '@/composables/useCalendarNavigation';
 
+const viewMode = ref<ViewMode>('Month');
+
 const {
   currentDate,
   currentMonthYear,
-  changeMonth,
+  navigateDate,
   goToToday
-} = useCalendarNavigation();
-
-const viewMode = ref<ViewMode>('Month');
+} = useCalendarNavigation(viewMode);
 </script>

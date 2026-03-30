@@ -18,7 +18,7 @@
         </h2>
       </div>
       <button 
-        @click="OnTodayClicked"
+        @click="onTodayClicked"
         class="border border-slate-500 rounded-4xl 
               px-6 py-2 text-sm font-semibold text-slate-800 
               hover:cursor-pointer hover:bg-gray-200
@@ -28,7 +28,7 @@
       </button>
       <div class="flex items-center gap-1">
         <button
-          @click="onMonthChange(-1)" 
+          @click="onNavigateDate(-1)" 
           class="inline-flex items-center justify-center 
                 size-10 rounded-full hover:bg-gray-200 hover:cursor-pointer
                 active:bg-gray-300 translate-y-px 
@@ -40,7 +40,7 @@
         </button>
 
         <button 
-          @click="onMonthChange(1)"
+          @click="onNavigateDate(1)"
           class="inline-flex items-center justify-center 
                 size-10 rounded-full hover:bg-gray-200 hover:cursor-pointer
                 active:bg-gray-300 translate-y-px
@@ -74,7 +74,7 @@
         <DropdownItem value="Appearance">Appearance</DropdownItem>
       </Dropdown>
       <Dropdown 
-        @select="OnViewModeUpdate"
+        @select="onViewModeUpdate"
         btn-class="flex gap-2 border border-slate-500 rounded-4xl
               px-5 py-2 text-sm font-semibold text-slate-800
               hover:cursor-pointer hover:bg-gray-200
@@ -110,25 +110,21 @@ import { computed } from 'vue';
 
 const emit = defineEmits<{
   'todayEvent': [],
-  'updateViewMode': [value: ViewMode]
+  'updateViewMode': [value: ViewMode],
+  'navigate': [offset: number]
 }>();
 
 const props = defineProps<{
   viewMode: ViewMode,
   currentDate: Date,
-  currentMonthYear: string,
-  onMonthChange: (offset: number) => void
+  currentMonthYear: string
 }>();
 
 const currDate = computed(() => {
   return `${props.currentDate.getDate()} ${props.currentMonthYear}`
-})
+});
 
-function OnTodayClicked() {
-  emit('todayEvent');
-}
-
-function OnViewModeUpdate(value: string) {
-  emit('updateViewMode', value as ViewMode);
-}
+const onTodayClicked = () => emit('todayEvent');
+const onViewModeUpdate = (value: string) => emit('updateViewMode', value as ViewMode);
+const onNavigateDate = (offset: number) => emit('navigate', offset);
 </script>

@@ -1,21 +1,29 @@
-import { ref, computed } from 'vue';
+import type { ViewMode } from '@/types/calendar';
+import { ref, computed, type Ref } from 'vue';
 
-export function useCalendarNavigation() {
+export function useCalendarNavigation(viewMode: Ref<ViewMode>) {
   const currentDate = ref<Date>(new Date());
 
   const currentMonthYear = computed(() => {
     return `${currentDate.value.toLocaleString('en', {month: 'long'})} ${currentDate.value.getFullYear()}`;
   });
 
-  function changeMonth(offset: number) {
+  function navigateDate(offset: number) {
     const d = new Date(currentDate.value);
-    const day = d.getDate();
-
-    d.setDate(1);
-    d.setMonth(d.getMonth() + offset);
-
-    const daysInMonth = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
-    d.setDate(Math.min(day, daysInMonth));
+    switch (viewMode.value) {
+      case 'Day':
+        d.setDate(d.getDate() + offset);
+        break;
+      case 'Week':
+        d.setDate(d.getDate() + offset * 7);
+        break;
+      case 'Month':
+        d.setMonth(d.getMonth() + offset);
+        break;
+      case 'Year':
+        d.setFullYear(d.getFullYear() + offset);
+        break;
+    }
     currentDate.value = d;
   }
 
@@ -24,7 +32,8 @@ export function useCalendarNavigation() {
 
     // only update if current view is not todays current date 
     if (today.getFullYear() !== currentDate.value.getFullYear() ||
-        today.getMonth() !== currentDate.value.getMonth()
+        today.getMonth() !== currentDate.value.getMonth() ||
+        today.getDate() !== currentDate.value.getDate()
       ) {
       currentDate.value = today;
     }
@@ -33,7 +42,7 @@ export function useCalendarNavigation() {
   return { 
     currentDate,
     currentMonthYear, 
-    changeMonth,
+    navigateDate,
     goToToday
   }
 }

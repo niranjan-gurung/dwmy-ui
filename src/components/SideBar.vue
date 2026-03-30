@@ -27,7 +27,7 @@
         </h2>
         <div>
           <button
-            @click="onMonthChange(-1)"
+            @click="onNavigateDate(-1)"
             class="inline-flex items-center justify-center 
                   size-6 rounded-full hover:bg-slate-200 hover:cursor-pointer
                   active:bg-slate-300 translate-y-px">
@@ -36,7 +36,7 @@
             </svg>
           </button>
           <button 
-            @click="onMonthChange(1)"
+            @click="onNavigateDate(1)"
             class="inline-flex items-center justify-center 
                   size-6 rounded-full hover:bg-slate-200 hover:cursor-pointer
                   active:bg-slate-300 translate-y-px">
@@ -60,13 +60,15 @@ import DropdownItem from './dropdown/DropdownItem.vue';
 import MiniCalendar from './MiniCalendar.vue';
 import WeekdayHeader from './WeekdayHeader.vue';
 
-const props = defineProps<{ 
-  currentDate: Date,
-  currentMonthYear: string,
-  onMonthChange: (offset: number) => void
+const emit = defineEmits<{
+  'navigate': [offset: number]
 }>();
 
-function onCreateSelected() {
-  console.log('create clicked!');
-}
+const props = defineProps<{ 
+  currentDate: Date,
+  currentMonthYear: string
+}>();
+
+const onCreateSelected = () => console.log('create clicked!');
+const onNavigateDate = (offset: number) => emit('navigate', offset);
 </script>
