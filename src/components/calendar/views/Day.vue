@@ -2,10 +2,10 @@
   <div class="flex flex-col h-full p-4 bg-white">
     <div class="flex flex-col w-32 items-center mb-4">
       <p class="text-xs text-gray-600 font-semibold">
-        {{ weekday.toUpperCase() }}
+        {{ weekdayShort.toUpperCase() }}
       </p>
       <p class="text-2xl font-semibold">
-        {{ today }}
+        {{ dayNumber }}
       </p>
     </div>
     <ul class="overflow-y-auto flex-1">
@@ -21,19 +21,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { toRef } from 'vue';
+import { useDateFormatting } from '@/composables/useWeekDates';
 
 const props = defineProps<{ 
   currentDate: Date 
 }>();
 
-const weekday = computed(() => props.currentDate.toLocaleDateString('en', { weekday: 'short' }));
-const today = computed(() => props.currentDate.toLocaleDateString('en', { day: 'numeric' }));
-
-function formatHour(hour: number): string {
-  if (hour === 0) return 'GMT+00';
-  if (hour < 12) return `${hour} AM`;
-  if (hour === 12) return '12 PM';
-  return `${hour - 12} PM`;
-}
+const {
+  weekdayShort,
+  dayNumber, 
+  formatHour 
+} = useDateFormatting(toRef(props, 'currentDate'));
 </script>

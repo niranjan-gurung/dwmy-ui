@@ -54,7 +54,7 @@
       <h2 class="text-xl font-medium leading-none">
         <div v-if="viewMode === 'Day'">{{ currDate }}</div>
         <div v-else-if="viewMode === 'Year'">{{ currentDate.getFullYear() }}</div>
-        <div v-else>{{ currentMonthYear }}</div>
+        <div v-else>{{ monthYear }}</div>
       </h2>
     </div>
     <div class="flex justify-center items-center gap-6">
@@ -103,10 +103,11 @@
 </template>
 
 <script setup lang="ts">
+import { useDateFormatting } from '@/composables/useWeekDates';
 import Dropdown from './dropdown/Dropdown.vue';
 import DropdownItem from './dropdown/DropdownItem.vue';
 import type { ViewMode } from '@/types/calendar';
-import { computed } from 'vue';
+import { computed, toRef } from 'vue';
 
 const emit = defineEmits<{
   'todayEvent': [],
@@ -116,13 +117,13 @@ const emit = defineEmits<{
 
 const props = defineProps<{
   viewMode: ViewMode,
-  currentDate: Date,
-  currentMonthYear: string
+  currentDate: Date
 }>();
 
-const currDate = computed(() => {
-  return `${props.currentDate.getDate()} ${props.currentMonthYear}`
-});
+const { monthYear } = useDateFormatting(toRef(props, 'currentDate'));
+
+// title for day viewmode
+const currDate = computed(() => `${props.currentDate.getDate()} ${monthYear.value}`);
 
 const onTodayClicked = () => emit('todayEvent');
 const onViewModeUpdate = (value: string) => emit('updateViewMode', value as ViewMode);

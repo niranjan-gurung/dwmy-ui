@@ -23,7 +23,7 @@
     <section class="space-y-2">
       <div class="flex items-center justify-between gap-1">
         <h2 class="font-semibold pl-2">
-          {{ currentMonthYear }}
+          {{ monthYear }}
         </h2>
         <div>
           <button
@@ -47,7 +47,10 @@
         </div>
       </div>
       <div class="grid grid-cols-7 gap-px">
-        <WeekdayHeader :is-initial="true" />
+        <WeekdayHeader 
+          :current-date="currentDate"
+          :is-initial="true" 
+        />
         <MiniCalendar :current-date="currentDate" />
       </div>
     </section>
@@ -55,19 +58,22 @@
 </template>
 
 <script setup lang="ts">
+import { useDateFormatting } from '@/composables/useWeekDates';
 import Dropdown from './dropdown/Dropdown.vue';
 import DropdownItem from './dropdown/DropdownItem.vue';
 import MiniCalendar from './MiniCalendar.vue';
 import WeekdayHeader from './WeekdayHeader.vue';
+import { toRef } from 'vue';
 
 const emit = defineEmits<{
   'navigate': [offset: number]
 }>();
 
 const props = defineProps<{ 
-  currentDate: Date,
-  currentMonthYear: string
+  currentDate: Date
 }>();
+
+const { monthYear } = useDateFormatting(toRef(props, 'currentDate'));
 
 const onCreateSelected = () => console.log('create clicked!');
 const onNavigateDate = (offset: number) => emit('navigate', offset);

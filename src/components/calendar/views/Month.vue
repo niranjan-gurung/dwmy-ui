@@ -5,7 +5,10 @@
       gridTemplateRows: `auto repeat(${weekCount}, 1fr)`
     }"
   >
-    <WeekdayHeader :isInitial="false" />
+    <WeekdayHeader 
+      :current-date="currentDate"
+      :isInitial="false" 
+    />
     <DayCard 
       v-for="cell in calendarCells" 
       :key="cell.fullDate.toISOString()"

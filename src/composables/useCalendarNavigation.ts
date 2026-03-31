@@ -4,10 +4,6 @@ import { ref, computed, type Ref } from 'vue';
 export function useCalendarNavigation(viewMode: Ref<ViewMode>) {
   const currentDate = ref<Date>(new Date());
 
-  const currentMonthYear = computed(() => {
-    return `${currentDate.value.toLocaleString('en', {month: 'long'})} ${currentDate.value.getFullYear()}`;
-  });
-
   function navigateDate(offset: number) {
     const d = new Date(currentDate.value);
     switch (viewMode.value) {
@@ -41,7 +37,6 @@ export function useCalendarNavigation(viewMode: Ref<ViewMode>) {
 
   return { 
     currentDate,
-    currentMonthYear, 
     navigateDate,
     goToToday
   }

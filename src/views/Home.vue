@@ -4,7 +4,6 @@
       :view-mode="viewMode"
       @update-view-mode="viewMode = $event"
       :current-date="currentDate"
-      :current-month-year="currentMonthYear"
       @navigate="navigateDate"
       @today-event="goToToday"
     />
@@ -12,7 +11,6 @@
       <section class="w-62">
         <SideBar 
           :current-date="currentDate"
-          :current-month-year="currentMonthYear"
           @navigate="navigateDate"
         />
       </section>
@@ -38,7 +36,6 @@ const viewMode = ref<ViewMode>('Month');
 
 const {
   currentDate,
-  currentMonthYear,
   navigateDate,
   goToToday
 } = useCalendarNavigation(viewMode);
