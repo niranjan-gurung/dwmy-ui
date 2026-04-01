@@ -2,10 +2,13 @@
   <div 
     v-for="day in weekdays" 
     :key="day.toISOString()"
-    class="text-xs text-gray-600 font-semibold pt-2 text-center"
+    class="text-xs text-gray-600 font-semibold text-center"
     :class="{'bg-white': !isInitial && viewMode !== null}"
   >
-    <p v-if="viewMode !== 'Week'">
+    <p 
+      v-if="viewMode !== 'Week'"
+      class="pt-2"
+    >
       {{ !isInitial 
           ? day.toLocaleDateString('en', { weekday: 'short' }).toUpperCase() 
           : day.toLocaleDateString('en', { weekday: 'short' })[0] }}
@@ -22,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { useDateFormatting } from '@/composables/useWeekDates';
+import { useDateFormatting } from '@/composables/useDateFormatting';
 import { toRef } from 'vue';
 
 const props = defineProps<{ 

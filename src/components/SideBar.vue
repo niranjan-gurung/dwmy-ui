@@ -58,7 +58,7 @@
 </template>
 
 <script setup lang="ts">
-import { useDateFormatting } from '@/composables/useWeekDates';
+import { useDateFormatting } from '@/composables/useDateFormatting';
 import Dropdown from './dropdown/Dropdown.vue';
 import DropdownItem from './dropdown/DropdownItem.vue';
 import MiniCalendar from './MiniCalendar.vue';

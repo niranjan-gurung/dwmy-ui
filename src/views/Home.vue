@@ -1,9 +1,9 @@
 <template>
   <main class="flex flex-col bg-slate-50 h-screen px-4 py-2">
     <NavBar 
+      :header-text="headerText"
       :view-mode="viewMode"
       @update-view-mode="viewMode = $event"
-      :current-date="currentDate"
       @navigate="navigateDate"
       @today-event="goToToday"
     />
@@ -31,6 +31,7 @@ import NavBar from '@/components/NavBar.vue';
 import SideBar from '@/components/SideBar.vue';
 import type { ViewMode } from '@/types/calendar';
 import { useCalendarNavigation } from '@/composables/useCalendarNavigation';
+import { useCalendarHeader } from '@/composables/useCalendarHeader';
 
 const viewMode = ref<ViewMode>('Month');
 
@@ -39,4 +40,6 @@ const {
   navigateDate,
   goToToday
 } = useCalendarNavigation(viewMode);
+
+const { headerText } = useCalendarHeader(currentDate, viewMode);
 </script>

@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
 import { toRef } from 'vue';
-import { useDateFormatting } from '@/composables/useWeekDates';
+import { useDateFormatting } from '@/composables/useDateFormatting';
 
 const props = defineProps<{ 
   currentDate: Date 
