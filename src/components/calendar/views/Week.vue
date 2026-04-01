@@ -1,10 +1,7 @@
 <template>
-  <div class="flex flex-col h-full p-4 bg-white">
-    <!-- scroll container -->
+  <div class="flex flex-col h-full pl-4 pt-4 pb-4 bg-white">
     <div class="overflow-y-auto h-full">
-      <!-- grid -->
       <div class="grid grid-cols-[60px_1fr]">
-        <!-- sticky header -->
         <div class="sticky top-0 z-10 border-b border-r border-slate-300 bg-white 
               flex text-xs font-semibold text-gray-600 items-end"
         >
@@ -12,7 +9,7 @@
         </div>
         
         <div class="sticky top-0 z-10 border-b border-slate-300 bg-white h-16">
-          <div class="grid grid-cols-7 gap-px">
+          <div class="grid grid-cols-7">
             <WeekdayHeader
               :current-date="currentDate" 
               :isInitial="false"
@@ -34,11 +31,14 @@
         </div>
 
         <!-- week grid -->
-        <div class="grid grid-cols-7 gap-px">
+        <div class="grid grid-cols-7">
           <div 
-            v-for="day in 7"
-            :key="day"
-            class="flex flex-col border-r border-slate-300"
+            v-for="day in weekdays"
+            :key="day.toISOString()"
+            class="flex flex-col border-r border-slate-300 last:border-r-0"
+            :class="{
+              'bg-blue-50/40': isToday(day)
+            }"
           >
             <div 
               v-for="hour in 24"
@@ -62,5 +62,9 @@ const props = defineProps<{
   currentDate: Date 
 }>();
 
-const { formatHour } = useDateFormatting(toRef(props, 'currentDate'));
+const { 
+  weekdays,
+  isToday, 
+  formatHour
+} = useDateFormatting(toRef(props, 'currentDate'));
 </script>

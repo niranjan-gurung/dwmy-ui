@@ -2,8 +2,11 @@
   <div 
     v-for="day in weekdays" 
     :key="day.toISOString()"
-    class="text-xs text-gray-600 font-semibold text-center"
-    :class="{'bg-white': !isInitial && viewMode !== null}"
+    class="group text-xs text-gray-600 font-semibold text-center"
+    :class="{
+      'bg-white': !isInitial && viewMode !== null,
+      'is-today': isToday(day)
+    }"
   >
     <p 
       v-if="viewMode !== 'Week'"
@@ -13,11 +16,13 @@
           ? day.toLocaleDateString('en', { weekday: 'short' }).toUpperCase() 
           : day.toLocaleDateString('en', { weekday: 'short' })[0] }}
     </p>
-    <div v-else>
-      <p class="text-xs font-semibold">
+    <div v-else class="flex flex-col items-center gap-1">
+      <p class="text-xs font-semibold group-[.is-today]:text-blue-500">
         {{ day.toLocaleDateString('en', { weekday: 'short' }).toUpperCase() }}
       </p>
-      <p class="text-2xl font-semibold text-black">
+      <p class="flex justify-center items-center text-2xl font-semibold size-9 text-black
+        group-[.is-today]:bg-blue-500 group-[.is-today]:text-white group-[.is-today]:rounded-full"
+      >
         {{ day.getDate() }}
       </p>
     </div>
@@ -34,5 +39,8 @@ const props = defineProps<{
   viewMode?: string
 }>();
 
-const { weekdays } = useDateFormatting(toRef(props, 'currentDate'));
+const {
+  weekdays, 
+  isToday 
+} = useDateFormatting(toRef(props, 'currentDate'));
 </script>

@@ -39,6 +39,16 @@ export function useDateFormatting(currentDate: Ref<Date>) {
     })
   );
 
+  function isToday(date: Date): boolean {
+    const today = new Date();
+
+    return (
+      date.getFullYear() === today.getFullYear() &&
+      date.getMonth() === today.getMonth() &&
+      date.getDate() === today.getDate()
+    );
+  }
+
   function formatHour(hour: number): string {
     if (hour === 0) return '12 AM';
     if (hour < 12) return `${hour} AM`;
@@ -52,6 +62,7 @@ export function useDateFormatting(currentDate: Ref<Date>) {
     weekdayLong,
     dayNumber,
     monthYear,
+    isToday,
     formatHour 
   };
 }

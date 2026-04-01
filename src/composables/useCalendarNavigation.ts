@@ -1,8 +1,11 @@
 import type { ViewMode } from '@/types/calendar';
-import { ref, computed, type Ref } from 'vue';
+import { ref, type Ref } from 'vue';
+import { useDateFormatting } from './useDateFormatting';
 
 export function useCalendarNavigation(viewMode: Ref<ViewMode>) {
   const currentDate = ref<Date>(new Date());
+  
+  const { isToday } = useDateFormatting(currentDate);
 
   function navigateDate(offset: number) {
     const d = new Date(currentDate.value);
@@ -24,14 +27,9 @@ export function useCalendarNavigation(viewMode: Ref<ViewMode>) {
   }
 
   function goToToday() {
-    const today = new Date();
-
     // only update if current view is not todays current date 
-    if (today.getFullYear() !== currentDate.value.getFullYear() ||
-        today.getMonth() !== currentDate.value.getMonth() ||
-        today.getDate() !== currentDate.value.getDate()
-      ) {
-      currentDate.value = today;
+    if (!isToday(currentDate.value)) {
+      currentDate.value = new Date();
     }
   }
 

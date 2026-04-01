@@ -9,11 +9,17 @@
         </div>
 
         <div class="sticky top-0 z-10 border-b border-slate-300 bg-white h-16">
-          <div class="flex flex-col justify-start items-center h-full w-20">
-            <p class="text-xs text-gray-600 font-semibold">
+          <div 
+            class="group flex flex-col items-center h-full w-20 gap-1"
+            :class="{'is-today': isToday(currentDate)}"
+          >
+            <p class="text-xs text-gray-600 font-semibold group-[.is-today]:text-blue-500">
               {{ weekdayShort.toUpperCase() }}
             </p>
-            <p class="text-2xl font-semibold">
+            <p 
+              class="flex justify-center items-center text-2xl font-semibold size-9
+                    group-[.is-today]:bg-blue-500 group-[.is-today]:text-white group-[.is-today]:rounded-full"
+            >
               {{ dayNumber }}
             </p>
           </div>
@@ -39,8 +45,6 @@
           />
         </div>
       </div>
-
-
     </div>
   </div>
 </template>
@@ -56,6 +60,7 @@ const props = defineProps<{
 const {
   weekdayShort,
   dayNumber, 
+  isToday,
   formatHour 
 } = useDateFormatting(toRef(props, 'currentDate'));
 </script>
