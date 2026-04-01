@@ -15,7 +15,7 @@
     </p>
     <div v-else>
       <p class="text-xs font-semibold">
-        {{ day.toLocaleDateString('en', { weekday: 'short' }) }}
+        {{ day.toLocaleDateString('en', { weekday: 'short' }).toUpperCase() }}
       </p>
       <p class="text-2xl font-semibold text-black">
         {{ day.getDate() }}
