@@ -1,15 +1,23 @@
 <template>
   <div class="flex flex-col h-full pl-4 pt-4 pb-4 bg-white">
-    <div class="overflow-y-auto h-full">
+    <div 
+      @scroll.passive="onScroll"
+      class="overflow-y-auto h-full"
+    >
       <div class="grid grid-cols-[60px_1fr]">
-        <div class="sticky top-0 z-10 border-b border-r border-slate-300 bg-white 
+        <div 
+          class="sticky top-0 z-10 border-b border-r border-slate-300 bg-white 
               flex text-xs font-semibold text-gray-600 items-end"
+          :class="{ 'shadow-[0_2px_4px_rgba(0,0,0,0.05)]': isScrolled }"
         >
           GMT+01
         </div>
 
-        <div class="sticky top-0 z-10 border-b border-slate-300 bg-white h-16">
-          <div 
+        <div 
+          class="sticky top-0 z-10 border-b border-slate-300 bg-white h-16"
+          :class="{ 'shadow-[0_2px_4px_rgba(0,0,0,0.05)]': isScrolled }"
+        >
+          <div @scroll="" 
             class="group flex flex-col items-center h-full w-20 gap-1"
             :class="{'is-today': isToday(currentDate)}"
           >
@@ -52,6 +60,7 @@
 <script setup lang="ts">
 import { toRef } from 'vue';
 import { useDateFormatting } from '@/composables/useDateFormatting';
+import { useScrollShadow } from '@/composables/useScrollShadow';
 
 const props = defineProps<{ 
   currentDate: Date 
@@ -63,4 +72,9 @@ const {
   isToday,
   formatHour 
 } = useDateFormatting(toRef(props, 'currentDate'));
+
+const { 
+  isScrolled, 
+  onScroll 
+} = useScrollShadow();
 </script>

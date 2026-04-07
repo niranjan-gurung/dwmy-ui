@@ -27,6 +27,8 @@ const props = defineProps<{
   currentDate: Date 
 }>();
 
-const { calendarCells, weekCount } = 
-  useCalendarGrid(toRef(props, 'currentDate'));
+const { 
+  calendarCells, 
+  weekCount 
+} = useCalendarGrid(toRef(props, 'currentDate'));
 </script>

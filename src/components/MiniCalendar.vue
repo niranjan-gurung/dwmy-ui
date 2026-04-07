@@ -36,12 +36,8 @@ const displayDate = computed(() => {
     const day = d.getDay();
     d.setDate(d.getDate() - day);
   }
-
   return d;
 });
-
-const { calendarCells, weekCount } = 
-  useCalendarGrid(displayDate, { fixedGrid: true });
 
 const highlightDate = computed(() => {
   const d = new Date(props.currentDate);
@@ -65,7 +61,12 @@ const highlightDate = computed(() => {
   }
 });
 
-function isSameDay(a: Date, b: Date) {
+const { 
+  calendarCells,
+  weekCount 
+} = useCalendarGrid(displayDate, { fixedGrid: true });
+
+function isSameDay(a: Date, b: Date): boolean {
   return (
     a.getFullYear() === b.getFullYear() &&
     a.getMonth() === b.getMonth() &&
@@ -73,12 +74,10 @@ function isSameDay(a: Date, b: Date) {
   );
 }
 
-function shouldHighlight(cell: CalendarCell) {
-  if (!isSameDay(cell.fullDate, highlightDate.value)) {
+function shouldHighlight(cell: CalendarCell): boolean {
+  if (!isSameDay(cell.fullDate, highlightDate.value))
     return false;
-  }
 
-  // restrict for Month view
   if (props.viewMode === 'Month')
     return cell.isCurrentMonth;
 
