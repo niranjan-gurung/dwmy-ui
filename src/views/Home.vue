@@ -11,6 +11,7 @@
       <section class="w-62">
         <SideBar 
           :current-date="currentDate"
+          :view-mode="viewMode"
           @navigate="navigateDate"
         />
       </section>

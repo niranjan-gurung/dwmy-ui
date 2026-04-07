@@ -51,7 +51,10 @@
           :current-date="currentDate"
           :is-initial="true" 
         />
-        <MiniCalendar :current-date="currentDate" />
+        <MiniCalendar 
+          :current-date="currentDate" 
+          :view-mode="viewMode"
+        />
       </div>
     </section>
   </div>
@@ -64,13 +67,15 @@ import DropdownItem from './dropdown/DropdownItem.vue';
 import MiniCalendar from './MiniCalendar.vue';
 import WeekdayHeader from './WeekdayHeader.vue';
 import { toRef } from 'vue';
+import type { ViewMode } from '@/types/calendar';
 
 const emit = defineEmits<{
   'navigate': [offset: number]
 }>();
 
 const props = defineProps<{ 
-  currentDate: Date
+  currentDate: Date,
+  viewMode: ViewMode
 }>();
 
 const { monthYear } = useDateFormatting(toRef(props, 'currentDate'));
