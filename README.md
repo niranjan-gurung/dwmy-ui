@@ -14,9 +14,3 @@ Learning:
 - composables
 - provide/inject
 - lifecycle hooks
-
-## todo
-- watchers
-- authentication
-
-Will eventually connect a backend for background processing (reminders, events)
