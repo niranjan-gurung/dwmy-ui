@@ -2,9 +2,9 @@
   <div 
     v-for="day in weekdays" 
     :key="day.toISOString()"
-    class="group text-xs text-gray-600 font-semibold text-center"
+    class="group text-center text-xs font-semibold app-text-secondary"
     :class="{
-      'bg-white': !isInitial && viewMode !== null,
+      'app-surface': !isInitial && viewMode !== null,
       'is-today': isToday(day)
     }"
   >
@@ -20,7 +20,7 @@
       <p class="text-xs font-semibold group-[.is-today]:text-blue-500">
         {{ day.toLocaleDateString('en', { weekday: 'short' }).toUpperCase() }}
       </p>
-      <p class="flex justify-center items-center text-2xl font-semibold size-9 text-black
+      <p class="flex justify-center items-center text-2xl font-semibold size-9 text-(--text-primary)
         group-[.is-today]:bg-blue-500 group-[.is-today]:text-white group-[.is-today]:rounded-full"
       >
         {{ day.getDate() }}

@@ -1,5 +1,5 @@
 <template>
-  <main class="flex flex-col bg-slate-50 h-screen px-4 py-2">
+  <main class="flex h-screen flex-col bg-(--app-bg) px-4 py-2 transition-colors duration-200">
     <NavBar 
       :header-text="headerText"
       :view-mode="viewMode"
@@ -15,7 +15,7 @@
           @navigate="navigateDate"
         />
       </section>
-      <section class="flex-1 overflow-hidden bg-slate-300 rounded-4xl ml-4">
+      <section class="app-surface-muted ml-4 flex-1 overflow-hidden rounded-4xl border app-border">
         <Calendar 
           :view-mode="viewMode"
           :current-date="currentDate" 

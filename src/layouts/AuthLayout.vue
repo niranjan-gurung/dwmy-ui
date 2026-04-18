@@ -1,5 +1,5 @@
 <template>
-  <main class="bg-neutral-100 min-h-screen">
+  <main class="min-h-screen bg-(--app-bg) text-(--text-primary) transition-colors duration-200">
     <div class="mx-auto max-w-screen-2xl p-4">
       <nav class="flex justify-between items-center">
         <router-link 

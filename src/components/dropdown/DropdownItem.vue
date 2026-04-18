@@ -1,8 +1,7 @@
 <template>
   <button
     @click="select(value)"
-    class="block w-full text-left px-4 py-2 text-sm 
-        hover:bg-slate-200 hover:cursor-pointer"
+    class="app-dropdown-item block w-full px-4 py-2 text-left text-sm"
   >
     <slot></slot>
   </button>

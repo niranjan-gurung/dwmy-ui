@@ -1,27 +1,26 @@
 <template>
-  <div class="flex flex-col h-full pl-4 pt-4 pb-4 bg-white">
+  <div class="app-surface flex h-full flex-col pb-4 pl-4 pt-4">
     <div 
       @scroll.passive="onScroll"
       class="overflow-y-auto h-full"
     >
       <div class="grid grid-cols-[60px_1fr]">
         <div 
-          class="sticky top-0 z-10 border-b border-r border-slate-300 bg-white 
-              flex text-xs font-semibold text-gray-600 items-end"
+          class="app-surface app-border sticky top-0 z-10 flex items-end border-b border-r text-xs font-semibold app-text-secondary"
           :class="{ 'shadow-[0_2px_4px_rgba(0,0,0,0.05)]': isScrolled }"
         >
           GMT+01
         </div>
 
         <div 
-          class="sticky top-0 z-10 border-b border-slate-300 bg-white h-16"
+          class="app-surface app-border sticky top-0 z-10 h-16 border-b"
           :class="{ 'shadow-[0_2px_4px_rgba(0,0,0,0.05)]': isScrolled }"
         >
           <div @scroll="" 
             class="group flex flex-col items-center h-full w-20 gap-1"
             :class="{'is-today': isToday(currentDate)}"
           >
-            <p class="text-xs text-gray-600 font-semibold group-[.is-today]:text-blue-500">
+            <p class="text-xs font-semibold app-text-secondary group-[.is-today]:text-blue-500">
               {{ weekdayShort.toUpperCase() }}
             </p>
             <p 
@@ -37,8 +36,7 @@
           <div
             v-for="hour in 24"
             :key="hour"
-            class="h-14 text-xs font-semibold text-gray-600 pt-1
-                  border-b border-r border-slate-300 flex items-center"
+            class="app-border app-text-secondary flex h-14 items-center border-b border-r pt-1 text-xs font-semibold"
           >
             {{ formatHour(hour - 1) }}
           </div>
@@ -48,8 +46,7 @@
           <div
             v-for="hour in 24"
             :key="hour"
-            class="h-14 border-b border-slate-300 
-                  hover:bg-blue-50 transition-colors cursor-pointer"
+            class="app-border h-14 cursor-pointer border-b transition-colors hover:bg-(--surface-accent-wash)"
           />
         </div>
       </div>

@@ -1,9 +1,8 @@
 <template>
-  <nav class="flex justify-between items-center pb-2">
+  <nav class="flex items-center justify-between pb-2">
     <div class="flex justify-center items-center gap-6">
       <!-- hamburger toggle button svg -->
-      <button class="inline-flex justify-center items-center size-12 
-              rounded-full hover:cursor-pointer hover:bg-gray-200"
+      <button class="app-icon-button size-12"
       >
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -19,20 +18,14 @@
       </div>
       <button 
         @click="onTodayClicked"
-        class="border border-slate-500 rounded-4xl 
-              px-6 py-2 text-sm font-semibold text-slate-800 
-              hover:cursor-pointer hover:bg-gray-200
-              active:bg-gray-300 transition-colors duration-200 ease-out"
+        class="app-pill-button rounded-4xl px-6 py-2 text-sm font-semibold"
       >
         Today
       </button>
       <div class="flex items-center gap-1">
         <button
           @click="onNavigateDate(-1)" 
-          class="inline-flex items-center justify-center 
-                size-10 rounded-full hover:bg-gray-200 hover:cursor-pointer
-                active:bg-gray-300 translate-y-px 
-                transition-colors duration-200 ease-out"
+          class="app-icon-button size-10 translate-y-px"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M15 18l-6-6 6-6"/>
@@ -41,10 +34,7 @@
 
         <button 
           @click="onNavigateDate(1)"
-          class="inline-flex items-center justify-center 
-                size-10 rounded-full hover:bg-gray-200 hover:cursor-pointer
-                active:bg-gray-300 translate-y-px
-                transition-colors duration-200 ease-out"
+          class="app-icon-button size-10 translate-y-px"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
             <path d="M9 6l6 6-6 6"/>
@@ -57,10 +47,8 @@
     </div>
     <div class="flex justify-center items-center gap-6">
       <Dropdown 
-        @select="() => {}"
-        btn-class="inline-flex items-center justify-center size-10 rounded-full 
-              hover:bg-gray-200 hover:cursor-pointer active:bg-gray-300
-              transition-colors duration-200 ease-out"
+        @select="onSettingsSelect"
+        btn-class="app-icon-button size-10"
       >
         <template #button>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -73,15 +61,12 @@
       </Dropdown>
       <Dropdown 
         @select="onViewModeUpdate"
-        btn-class="flex gap-2 border border-slate-500 rounded-4xl
-              px-5 py-2 text-sm font-semibold text-slate-800
-              hover:cursor-pointer hover:bg-gray-200
-              active:bg-gray-300 transition-colors duration-200 ease-out"
+        btn-class="app-pill-button flex gap-2 rounded-4xl px-5 py-2 text-sm font-semibold"
       >
         <template #button>
           {{ viewMode }}
-          <svg viewBox="0 0 24 24" class="size-4 shrink-0 self-center translate-y-px">
-            <path d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="size-4 shrink-0 self-center translate-y-px" stroke-width="1.8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
           </svg>
         </template>
         <DropdownItem value="Day">Day</DropdownItem>
@@ -89,9 +74,9 @@
         <DropdownItem value="Month">Month</DropdownItem>
         <DropdownItem value="Year">Year</DropdownItem>
       </Dropdown>
-      <div class="flex items-center justify-center 
-          size-10 rounded-full bg-neutral-200 
-          hover:cursor-pointer hover:ring-2 hover:ring-gray-300" 
+      <div class="app-surface-subtle flex items-center justify-center 
+          size-10 rounded-full border app-border
+          hover:cursor-pointer hover:ring-2 hover:ring-blue-400/30" 
         alt="User profile"
       >
         NG
@@ -104,6 +89,7 @@
 import Dropdown from './dropdown/Dropdown.vue';
 import DropdownItem from './dropdown/DropdownItem.vue';
 import type { ViewMode } from '@/types/calendar';
+import { useTheme } from '@/composables/useTheme';
 
 const emit = defineEmits<{
   'todayEvent': [],
@@ -116,7 +102,14 @@ const props = defineProps<{
   viewMode: ViewMode,
 }>();
 
+const { openAppearanceModal } = useTheme();
+
 const onTodayClicked = () => emit('todayEvent');
 const onViewModeUpdate = (value: string) => emit('updateViewMode', value as ViewMode);
 const onNavigateDate = (offset: number) => emit('navigate', offset);
+const onSettingsSelect = (value: string) => {
+  if (value === 'Appearance') {
+    openAppearanceModal();
+  }
+};
 </script>

@@ -2,15 +2,15 @@
   <div
     v-for="cell in calendarCells"
     :key="cell.fullDate.toISOString()"
-    :class="{'text-slate-500': !cell.isCurrentMonth}"
+    :class="{ 'app-text-muted': !cell.isCurrentMonth }"
     class="flex items-center justify-center text-xs py-1"
   >
     <span 
       class="flex items-center justify-center size-6 rounded-full cursor-pointer"
       :class="{ 
         'bg-blue-500 text-white': cell.isToday, 
-        'bg-blue-200': shouldHighlight(cell),
-        'hover:bg-slate-200': !cell.isToday
+        'bg-(--surface-accent-soft) text-(--text-primary)': shouldHighlight(cell),
+        'hover:bg-(--surface-hover)': !cell.isToday
       }"
     >
       {{ cell.day }}
